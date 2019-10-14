@@ -39,7 +39,7 @@ int main() {
 		puts("（4）推出程序");
 		puts("（5）按文件名排序");
 
-		scanf("%s\n", temp);
+		scanf("%s", temp);
 		if(strlen(temp) != 1) {
 			continue;
 		}
@@ -50,9 +50,10 @@ int main() {
 			case 1:
 				if(l < MAX_LENGTH) {
 					for(i = 0; i < MAX_LENGTH; i++) {
-						if(f_list[i][0] == 0) {
-							printf("输入文件名：");
-							scanf(GET_NAME, f_list[i]);
+						if(!f_list[i][0]) {
+							do{
+								printf("输入文件名：");
+							} while(!scanf(GET_NAME, f_list[i]));
 							p_list[i] = f_list[i];
 							l++;
 							break;
@@ -72,6 +73,7 @@ int main() {
 							p_list[i] = p_list[i + 1];
 						}
 						f_list[--index][0] = 0;
+						l--;
 					}
 				} else {
 					printf("列表没数据");
@@ -79,7 +81,7 @@ int main() {
 				break;
 			case 3:
 				for(i = 0; i < l; i++) {
-					printf("%d : %s", (i + 1), p_list[i]);
+					printf("%d : %s\n", (i + 1), p_list[i]);
 				}
 				break;
 			case 4:
@@ -91,7 +93,7 @@ int main() {
 				printf("别瞎输入\n");
 				break;
 		}
-		} while(exit_switch);
+	} while(exit_switch);
 
 	return 0;
 }
