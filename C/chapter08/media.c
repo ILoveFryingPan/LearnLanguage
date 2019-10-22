@@ -31,12 +31,13 @@ int main() {
 	int select_value;
 	char exit_switch = 1;
 	char *temp = malloc(sizeof(char) * 10);
+	char *cmp;
 	do{
 		puts("请选择操作命令：");
 		puts("（1）添加新文件：");
 		puts("（2）删除列表中的文件");
 		puts("（3）打印播放列表");
-		puts("（4）推出程序");
+		puts("（4）退出程序");
 		puts("（5）按文件名排序");
 
 		scanf("%s", temp);
@@ -88,12 +89,25 @@ int main() {
 				exit_switch = 0;
 				break;
 			case 5:
+				if(l > 1) {
+					for(i = 0; i < l - 1; i++) {
+						for(j = i + 1; j < l; j++) {
+							if(strcmp(p_list[i], p_list[j]) > 0) {
+								cmp = p_list[i];
+								p_list[i] = p_list[j];
+								p_list[j] = cmp;
+							}
+						}
+					}
+				}
 				break;
 			default:
 				printf("别瞎输入\n");
 				break;
 		}
 	} while(exit_switch);
+	free(temp);
+	temp = NULL;
 
 	return 0;
 }
