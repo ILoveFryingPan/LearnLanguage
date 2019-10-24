@@ -19,17 +19,17 @@ int main(int args, char *argv[]) {
 	input_stu(score);		//实际参数是二维数组首地址
 	avr_stu(score, a_stu);		//实际参数是二维数组首地址和一维数组首地址
 	avr_cor(score, a_cor);		//实际参数是二维数组首地址和一维数组首地址
-	printf("\n	序号	课程1	课程2	课程3	课程4	课程5	平均分");
+	printf("\n	序号	 课程1	 课程2	 课程3	 课程4	 课程5	 平均分");
 	for(i = 0; i < STUDENT; i++) {
-		printf("\n	NO%2d", i + 1);
+		printf("\n	NO%2d	 ", i + 1);
 		for(j = 0; j < COURSE; j++) {
-			printf("	%8.2f", score[i][j]);
+			printf("%8.2f	 ", score[i][j]);
 		}
-		printf("	%8.2f", a_stu[i]);
+		printf("%8.2f	 ", a_stu[i]);
 	}
-	printf("\n课平均");
+	printf("\n课平均	 ");
 	for(j = 0; j < COURSE; j++) {
-		printf("	%8.2f", a_cor[j]);
+		printf("%8.2f	 ", a_cor[j]);
 	}
 	h = highest(&r, &c, score);
 	printf("\n\n最高分%8.2f是 %d 号学生的第%d门课\n", h, r, c);
@@ -99,3 +99,9 @@ float s_diff(float *a_stu)
 	float sumxn;
 	sumx = 0.0;
 	sumxn = 0.0;
+	for(i = 0; i < STUDENT; i++) {
+		sumx = sumx + a_stu[i] * a_stu[i];
+		sumxn = sumxn + a_stu[i];
+	}
+	return (sumx / STUDENT - (sumxn / STUDENT) * (sumxn / STUDENT));
+}
