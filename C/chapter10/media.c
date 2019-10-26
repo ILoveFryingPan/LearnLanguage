@@ -50,7 +50,7 @@ int main() {
 		printf("输入的数字是：%d\n", select_value);
 		switch(select_value) {
 			case 1:
-				add(p_list, f_list, MAX_LENGTH, GET_NAME, &l);
+				add(p_list, f_list, MAX_FILE_LENGTH + 1, MAX_LENGTH, GET_NAME, &l);
 				//if(l < MAX_LENGTH) {
 				//	for(i = 0; i < MAX_LENGTH; i++) {
 				//		if(!f_list[i][0]) {
