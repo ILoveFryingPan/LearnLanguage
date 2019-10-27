@@ -7,19 +7,6 @@
 #define MAX_FILE_LENGTH 255
 #define GET_NAME "%255s"
 
-int ctoi(char *c) {
-	int result = 0;
-	int temp = 0;
-	while(*c) {
-		temp = *c - '0';
-		if(temp >= 0 && temp <= 9) {
-			result = result * 10 + temp;
-		}
-		c++;
-	}
-	return result;
-}
-
 int main() {
 	int i, j, l = 0;
 	char f_list[MAX_LENGTH][MAX_FILE_LENGTH + 1];
@@ -67,41 +54,44 @@ int main() {
 				//}
 				break;
 			case 2:
-				if(l > 0) {
-					printf("输入文件序号：\n");
-					scanf("%s", temp);
-					int index = ctoi(temp);
-					if(index > 0 && index <= l) {
-						for(i = index - 1; i < l - 1;i++) {
-							p_list[i] = p_list[i + 1];
-						}
-						f_list[--index][0] = 0;
-						l--;
-					}
-				} else {
-					printf("列表没数据");
-				}
+				del(p_list, &l);
+				//if(l > 0) {
+				//	printf("输入文件序号：\n");
+				//	scanf("%s", temp);
+				//	int index = ctoi(temp);
+				//	if(index > 0 && index <= l) {
+				//		p_list[--index][0] = 0;
+				//		for(i = index; i < l - 1;i++) {
+				//			p_list[i] = p_list[i + 1];
+				//		}
+				//		l--;
+				//	}
+				//} else {
+				//	printf("列表没数据");
+				//}
 				break;
 			case 3:
-				for(i = 0; i < l; i++) {
-					printf("%d : %s\n", (i + 1), p_list[i]);
-				}
+				p(p_list, &l);
+				//for(i = 0; i < l; i++) {
+				//	printf("%d : %s\n", (i + 1), p_list[i]);
+				//}
 				break;
 			case 4:
 				exit_switch = 0;
 				break;
 			case 5:
-				if(l > 1) {
-					for(i = 0; i < l - 1; i++) {
-						for(j = i + 1; j < l; j++) {
-							if(strcmp(p_list[i], p_list[j]) > 0) {
-								cmp = p_list[i];
-								p_list[i] = p_list[j];
-								p_list[j] = cmp;
-							}
-						}
-					}
-				}
+				sort(p_list, &l);
+				//if(l > 1) {
+				//	for(i = 0; i < l - 1; i++) {
+				//		for(j = i + 1; j < l; j++) {
+				//			if(strcmp(p_list[i], p_list[j]) > 0) {
+				//				cmp = p_list[i];
+				//				p_list[i] = p_list[j];
+				//				p_list[j] = cmp;
+				//			}
+				//		}
+				//	}
+				//}
 				break;
 			default:
 				printf("别瞎输入\n");
