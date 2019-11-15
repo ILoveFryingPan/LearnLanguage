@@ -38,60 +38,18 @@ int main() {
 		switch(select_value) {
 			case 1:
 				add(p_list, f_list, MAX_FILE_LENGTH + 1, MAX_LENGTH, GET_NAME, &l);
-				//if(l < MAX_LENGTH) {
-				//	for(i = 0; i < MAX_LENGTH; i++) {
-				//		if(!f_list[i][0]) {
-				//			do{
-				//				printf("输入文件名：");
-				//			} while(!scanf(GET_NAME, f_list[i]));
-				//			p_list[i] = f_list[i];
-				//			l++;
-						//	break;
-				//		}
-				//	}
-				//} else {
-				//	printf("列表满了\n");
-				//}
 				break;
 			case 2:
 				del(p_list, &l);
-				//if(l > 0) {
-				//	printf("输入文件序号：\n");
-				//	scanf("%s", temp);
-				//	int index = ctoi(temp);
-				//	if(index > 0 && index <= l) {
-				//		p_list[--index][0] = 0;
-				//		for(i = index; i < l - 1;i++) {
-				//			p_list[i] = p_list[i + 1];
-				//		}
-				//		l--;
-				//	}
-				//} else {
-				//	printf("列表没数据");
-				//}
 				break;
 			case 3:
 				p(p_list, &l);
-				//for(i = 0; i < l; i++) {
-				//	printf("%d : %s\n", (i + 1), p_list[i]);
-				//}
 				break;
 			case 4:
 				exit_switch = 0;
 				break;
 			case 5:
 				sort(p_list, &l);
-				//if(l > 1) {
-				//	for(i = 0; i < l - 1; i++) {
-				//		for(j = i + 1; j < l; j++) {
-				//			if(strcmp(p_list[i], p_list[j]) > 0) {
-				//				cmp = p_list[i];
-				//				p_list[i] = p_list[j];
-				//				p_list[j] = cmp;
-				//			}
-				//		}
-				//	}
-				//}
 				break;
 			default:
 				printf("别瞎输入\n");
