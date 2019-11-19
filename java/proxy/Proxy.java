@@ -1,6 +1,8 @@
 import staticProxy.StaticProxy;
 import staticProxy.Hello;
 import staticProxy.IHello;
+import dynamic.HelloInvocationHandler;
+//import java.lang.reflect.Proxy;
 
 public class Proxy {
 	public static void main(String[] args) {
@@ -8,5 +10,9 @@ public class Proxy {
 		StaticProxy staticProxy = new StaticProxy();
 		staticProxy.setIHello(hello);
 		staticProxy.sayHello();
+
+		HelloInvocationHandler handler = new HelloInvocationHandler<IHello>(hello);
+		IHello ihello = (IHello) Proxy.newProxyInstance(IHello.class.getClassLoader(), new Class<?>[]{IHello.class}, handler);
+		ihello.sayHello();
 	}
 }
