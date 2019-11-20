@@ -12,7 +12,7 @@ public class Proxy {
 		staticProxy.sayHello();
 
 		HelloInvocationHandler handler = new HelloInvocationHandler<IHello>(hello);
-		IHello ihello = (IHello) Proxy.newProxyInstance(IHello.class.getClassLoader(), new Class<?>[]{IHello.class}, handler);
+		IHello ihello = (IHello) java.lang.reflect.Proxy.newProxyInstance(IHello.class.getClassLoader(), new Class<?>[]{IHello.class}, handler);
 		ihello.sayHello();
 	}
 }
