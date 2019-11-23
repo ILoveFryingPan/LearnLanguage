@@ -1,9 +1,0 @@
-#include<stdio.h>
-int main(int argc, char *argv[])
-{
-	printf("参数个数：%d\n", argc);
-	for(int i = 0; i < argc; i++) {
-		printf("参数%d的值：%s\n", i, argv[i]);
-	}
-	return 0;
-}
