@@ -2,6 +2,12 @@
 #include<stdlib.h>
 #include<string.h>
 #include "file_cmd.h"
+
+void clear_buffer()
+{
+	scanf("%*[^\n]%*c");
+}
+
 void add(char *p_list[], char *f_list, int size, int list_max, char *file_max_length, int *list_num)
 {
 	if(*list_num < list_max) {
@@ -11,6 +17,7 @@ void add(char *p_list[], char *f_list, int size, int list_max, char *file_max_le
 			if(!*(f_list + size * i))
 			{
 				do{
+					clear_buffer();
 					printf("请输入文件名字：\n");
 				} while(!scanf(file_max_length, f_list + size * i));
 				p_list[*list_num] = f_list + i * size;
@@ -43,6 +50,7 @@ void del(char *p_list[], int *list_num)
 		char *num = (char *) malloc(sizeof(char) * 2);
 		char *buff = (char *) malloc(sizeof(char) * 11);
 		do{
+			clear_buffer();
 			printf("输入文件序号：");
 		} while(!scanf("%1s", num));
 		char c = getchar();

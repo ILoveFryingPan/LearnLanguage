@@ -29,6 +29,7 @@ int main() {
 		puts("（5）按文件名排序");
 
 		scanf("%s", temp);
+		clear_buffer();
 		if(strlen(temp) != 1) {
 			continue;
 		}
