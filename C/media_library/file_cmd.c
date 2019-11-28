@@ -100,3 +100,22 @@ void sort(char *p_list[], int *list_num)
 		}
 	}
 }
+
+char * search(char *p_list[], int *list_num, char *input, char *p_input)
+{
+	int i;
+	int find_mode = 0;	//用于保存查找模式，默认为0， 即完全匹配模式
+	p_input[0] = 0;
+	int score = 0;	//用于保存匹配项目的个数
+	puts("请输入要查找的字符串：");
+	puts("“=”开始表示完全匹配，“?”用于替代一个字符，“*”用于替代多个字符");
+	scanf(input, p_input);
+	clear_buffer();
+	if (p_input[0] != '=')
+		find_mode = 1;
+	else
+		memmove(p_input, p_input + 1, strlen(p_input));
+	for(i = 0; i < *list_num; i++) {
+		if(find_mode == 0)
+			if(
+}
