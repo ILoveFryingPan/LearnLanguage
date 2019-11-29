@@ -6,4 +6,5 @@ void del(char *p_list[], int *list_num);
 void p(char *p_list[], int *list_num);
 void sort(char *p_list[], int *list_num);
 void clear_buffer();
+void search(char *p_list[], int *list_num, char *input, char *p_input);
 #endif

@@ -101,7 +101,7 @@ void sort(char *p_list[], int *list_num)
 	}
 }
 
-char * search(char *p_list[], int *list_num, char *input, char *p_input)
+void search(char *p_list[], int *list_num, char *input, char *p_input)
 {
 	int i;
 	int find_mode = 0;	//用于保存查找模式，默认为0， 即完全匹配模式
@@ -117,5 +117,31 @@ char * search(char *p_list[], int *list_num, char *input, char *p_input)
 		memmove(p_input, p_input + 1, strlen(p_input));
 	for(i = 0; i < *list_num; i++) {
 		if(find_mode == 0)
-			if(
+			if(strlen(p_list[i]) == strlen(p_input)) {
+				res = strcmp(p_list[i], p_input);
+				if(res)
+					res = 1;
+				else
+					res = 0;
+			} else 
+				res = 0;
+		else
+			res = hazy_find(p_list[i], p_input);
+		if(res) {
+			printf("%d : %s\n", i + 1, p_list[i]);	//输出找到的字符串
+			score++;
+		}
+	}
+	if(score < 1) {
+		printf("找不到匹配的项目");
+	}
 }
+
+int hazy_find(const char *str1, const char *str2)
+{
+	const char *ct = "*?";	//保存通配符
+	int i, j = 0;	//用于保存str1、str2的操作位置
+	int l;		//用于保存str2的长度
+	int k;		//用于保存查找时每次查找的长度
+	char sec[strlen(str1)];	//用于保存每次查找的字符串分段
+	int res;	//用于保存查找结果
