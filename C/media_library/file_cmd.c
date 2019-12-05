@@ -107,6 +107,7 @@ void search(char *p_list[], int *list_num, char *input, char *p_input)
 	int find_mode = 0;	//用于保存查找模式，默认为0， 即完全匹配模式
 	p_input[0] = 0;
 	int score = 0;	//用于保存匹配项目的个数
+	int res;
 	puts("请输入要查找的字符串：");
 	puts("“=”开始表示完全匹配，“?”用于替代一个字符，“*”用于替代多个字符");
 	scanf(input, p_input);
@@ -120,9 +121,9 @@ void search(char *p_list[], int *list_num, char *input, char *p_input)
 			if(strlen(p_list[i]) == strlen(p_input)) {
 				res = strcmp(p_list[i], p_input);
 				if(res)
-					res = 1;
-				else
 					res = 0;
+				else
+					res = 1;
 			} else 
 				res = 0;
 		else
@@ -137,11 +138,49 @@ void search(char *p_list[], int *list_num, char *input, char *p_input)
 	}
 }
 
+
 int hazy_find(const char *str1, const char *str2)
 {
 	const char *ct = "*?";	//保存通配符
 	int i, j = 0;	//用于保存str1、str2的操作位置
 	int l;		//用于保存str2的长度
 	int k;		//用于保存查找时每次查找的长度
-	char sec[strlen(str1)];	//用于保存每次查找的字符串分段
+	char sec[strlen(str1) + 1];	//用于保存每次查找的字符串分段
 	int res;	//用于保存查找结果
+	const char *res2;	//用于保存查找结果
+	l = strlen(str2);	//取得str2字符串长度
+	if (l < 1)
+		return 0;	//如果str2长度小于1，则认为没有匹配的字符串
+	for (i = 0; i < l; i++) {	//遍历字符串str2
+		if (str2[i] == '?') {	//遍历到通配符“？”
+			j++;
+		} else if (str2[i] == '*') {	//遍历到通配符“*”
+			while(! (k = strcspn(str2 + i + 1, ct))) {
+				//取得距离下一个通配符的长度，如果为0则执行循环体
+				if (* (str2 + i + 1)) {	//判断下一个符号是不是字符串结束符（ASCII码为0）
+					i++;	//如果下一个也是通配符，则跳过
+				} else {
+					return 1;	//如果下一个符号是字符串结束符，认为已有匹配字符串
+				}
+			}
+			strncpy(sec, str2 + i + 1, k);	//将通配符间的字符串复制到sec数组
+			sec[k] = '\0';	//为数组加入字符串结束符
+			res2 = strstr(str1 + j, sec);	//在项目中查找字符串片段
+			if(!res2)
+				return 0;	//找不到该片段，认为不匹配
+			i += k;			//将str1的操作位置后移
+			j += strlen(str1 + j) - strlen(res2) + k;
+						//将str2的操作位置后移
+		} else {
+			k = strcspn(str2 + i, ct);	//取得到下个通配符号间的长度
+			res = strncmp(str1 + j, str2 + i, k);	//比较两个字符串指定长度的内容
+			if(res)
+				return 0;	//不相同时认为不匹配
+			else {
+				i += k - 1;
+				j += k;
+			}
+		}
+	}
+	return 1;
+}

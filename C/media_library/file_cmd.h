@@ -6,5 +6,6 @@ void del(char *p_list[], int *list_num);
 void p(char *p_list[], int *list_num);
 void sort(char *p_list[], int *list_num);
 void clear_buffer();
+int hazy_find(const char *str1, const char *str2);
 void search(char *p_list[], int *list_num, char *input, char *p_input);
 #endif

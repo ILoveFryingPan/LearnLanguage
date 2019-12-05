@@ -11,6 +11,7 @@ int main() {
 	int i, j, l = 0;
 	char f_list[MAX_LENGTH][MAX_FILE_LENGTH + 1];
 	char *p_list[MAX_LENGTH];
+	char p_input[257] = {0};
 	for(i = 0; i < MAX_LENGTH; i++) {
 		p_list[i] = NULL;
 		f_list[i][0] = 0;
@@ -27,6 +28,7 @@ int main() {
 		puts("（3）打印播放列表");
 		puts("（4）退出程序");
 		puts("（5）按文件名排序");
+		puts("（6）在播放列表中查找字符串");
 
 		scanf("%s", temp);
 		clear_buffer();
@@ -51,6 +53,9 @@ int main() {
 				break;
 			case 5:
 				sort(p_list, &l);
+				break;
+			case 6:
+				search(p_list, &l, "%255s", p_input);
 				break;
 			default:
 				printf("别瞎输入\n");
