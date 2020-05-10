@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>snow</title>
+</head>
+<body>
+	<h1>snow</h1>
+	<canvas id="canvas" width="400" height="400"></canvas>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		ctx.fillRect(0, 0, 50, 50);
+		// canvas.offset = {left: 500,top: 500};
+		// $("#canvas").offset({left: 500, top: 500});
+		// ctx.beginPath();
+		function circle(x, y, r, color, fill){
+			ctx.beginPath();
+			if (fill) {
+				ctx.fillStyle = color;
+			}else{
+				ctx.strokeStyle = color;
+			}
+			ctx.arc(x, y, r, 0, Math.PI * 2, false);
+			if (fill) {
+				ctx.fill();
+			}else{
+				ctx.stroke();
+			}
+		}
+
+		circle(150, 100, 50, "#000000", false);
+		circle(150, 110, 10, "#ffd700", true);
+		circle(170, 80, 10, "#000000", true);
+		circle(130, 80, 10, "#000000", true);
+		circle(150, 250, 100, "#000000", false);
+		circle(150, 250, 10, "#000000", true);
+		circle(150, 200, 10, "#000000", true);
+		circle(150, 300, 10, "#000000", true);
+	</script>
+
+</body>
+</html>

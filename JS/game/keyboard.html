@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>keyboard input</title>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400"></canvas>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var width = canvas.width;
+		var height = canvas.height;
+		function circle(x, y, radius, fill){
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+			if (fill) {
+				ctx.fill();
+			}else{
+				ctx.stroke();
+			}
+		}
+
+		var speed = 5;
+		var pause = true;
+
+		function Ball(){
+			this.x = width / 2;
+			this.y = height / 2;
+			this.xSpeed = 0;
+			this.ySpeed = 0;
+		}
+
+		Ball.prototype.draw = function(){
+			circle(this.x, this.y, 10, true);
+		}
+
+		Ball.prototype.check = function(){
+			if (!pause && this.xSpeed != 0) {
+				if (this.x < 0) {
+					this.x = width;
+				}
+
+				if (this.x > width) {
+					this.x = 0;
+				}
+			}
+
+			if (!pause && this.ySpeed != 0) {
+				if (this.y < 0) {
+					this.y = height;
+				}
+
+				if (this.y > height) {
+					this.y = 0;
+				}
+			}
+		}
+
+		Ball.prototype.move = function(){
+			this.x += this.xSpeed;
+			this.y += this.ySpeed;
+		}
+
+		Ball.prototype.setXSpeed = function(speed){
+			this.xSpeed = speed;
+			this.ySpeed = 0;
+		}
+
+		Ball.prototype.setYSpeed = function(speed){
+			this.ySpeed = speed;
+			this.xSpeed = 0;
+		}
+
+		var ball = new Ball();
+
+		$("body").keydown(function(event){
+			switch(event.keyCode){
+				case 32: 	//空格
+					pause = true;
+					break;
+				case 37: 	//左
+					ball.setXSpeed(-speed);
+					pause = false;
+					break
+				case 38: 	//上
+					ball.setYSpeed(-speed);
+					pause = false;
+					break
+				case 39: 	//右
+					ball.setXSpeed(speed);
+					pause = false;
+					break
+				case 40: 	//下
+					ball.setYSpeed(speed);
+					pause = false;
+					break;
+			}
+		});
+
+		setInterval(function(){
+			if (!pause) {
+				ctx.clearRect(0, 0, width, height);
+				ball.draw();
+				ball.move();
+				ball.check();
+				ctx.strokeRect(0, 0, width, height);
+			}
+		}, 30);
+	</script>
+</body>
+</html>

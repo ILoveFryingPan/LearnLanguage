@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>lines</title>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400"></canvas>
+	<script type="text/javascript">
+		var ctx = document.getElementById("canvas").getContext("2d");
+		var mysteryPoints = [
+		[50, 50],
+		[50, 100],
+		[25, 120],
+		[100, 50],
+		[70, 90],
+		[100, 90],
+		[70, 120]]
+		function lines(array){
+			if(array.length < 2){
+				return;
+			}
+			ctx.beginPath();
+			ctx.moveTo(array[0][0], array[0][1]);
+			for (var i = 1; i < array.length; i++) {
+				ctx.lineTo(array[i][0], array[i][1]);
+			}
+			ctx.stroke();
+		}
+
+		lines(mysteryPoints);
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>A Bouncing Ball</title>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400"></canvas>
+	<script type="text/javascript">
+		var can = document.getElementById("canvas");
+		var ctx = can.getContext("2d");
+		can.width = 200;
+		function Ball(){
+			this.x = 200;
+			this.y = 200;
+			this.xSpeed = -6;
+			this.ySpeed = 9;
+		}
+
+		function circle(x, y, radius, fill){
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+			if (fill) {
+				ctx.fill();
+			}else{
+				ctx.stroke();
+			}
+		}
+
+		Ball.prototype.draw = function(){
+			circle(this.x, this.y, 10, true);
+		};
+
+		Ball.prototype.checkCollision = function(){
+			if (this.x < 0 || this.x > 400) {
+				this.xSpeed = -this.xSpeed;
+			}
+
+			if (this.y < 0 || this.y > 400) {
+				this.ySpeed = -this.ySpeed;
+			}
+		};
+
+		Ball.prototype.move = function(){
+			this.x += this.xSpeed;
+			this.y += this.ySpeed;
+		}
+
+		var ball = new Ball();
+		setInterval(function(){
+			ctx.clearRect(0, 0, 400, 400);
+			ball.draw();
+			ball.move();
+			ball.checkCollision();
+			ctx.strokeRect(0, 0, 400, 400);
+		}, 30);
+	</script>
+</body>
+</html>

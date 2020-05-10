@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>mousemove</title>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400"></canvas>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript">
+		var ctx = document.getElementById("canvas").getContext("2d");
+		$("#canvas").mousemove(function(event){
+			ctx.beginPath();
+			ctx.arc(event.pageX, event.pageY, 5, 0, Math.PI * 2, false);
+			ctx.fill();
+		})
+	</script>
+
+</body>
+</html>
