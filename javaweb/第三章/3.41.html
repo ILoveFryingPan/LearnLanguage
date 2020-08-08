@@ -1,0 +1,33 @@
+<%@page language="java" pageEncoding="GBK"%>
+<html>
+	<head>
+		<title>一个简单的文档</title>
+		<script language="javascript">
+			var elementList="";
+			function getElement(node) {
+				var total = 0;
+				if(node.nodeType == 1) {
+					total++;
+					elementList = elementList + node.nodeName + "、";
+				}
+				var childrens = node.childNodes;
+				for(var m = node.firstChild; m != null; m = m.nextSibling) {
+					total += getElement(m);
+				}
+				return total;
+			}
+			
+			function show() {
+				var number = getElement(document);
+				elementList = elementList.substring(0, elementList.length - 1);
+				alert("该文档中包含：" + elementList + "等" + number + "个标记!");
+				elementList = "";
+			}
+		</script>
+	</head>
+	<body onload="show()">
+		欢迎访问明日科技网站!
+		<br/>
+		<a href="http://www.mingribook.com">http://www.mingribook.com</a>
+	</body>
+</html>
